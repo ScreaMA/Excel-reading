@@ -15,10 +15,11 @@ namespace Exceltesting
         static void Main(string[] args)
         {
             string filename;
-            int[] intArray;
-            int i, s=0, q=0;
-            intArray = new int[21];
-            for (i = 0; i < 21;i++ ) intArray[i] = 0;
+            double[] intArray;
+            int  i, q=0;
+            double s;
+            intArray = new double[25];
+            for (i = 0; i < 25;i++ ) intArray[i] = 0;
             while (true)
             {
                 q++;
@@ -32,20 +33,20 @@ namespace Exceltesting
                 ISheet sheet = workbook.GetSheet("Sheet1");
                 IRow row ;
                 
-                for (i = 1; i < 21; i++)
+                for (i = 1; i < 22; i++)
                 {
                     row = sheet.GetRow(i);
                     if (row != null)
                     {
                         s = 0;
                         Console.WriteLine(row.GetCell(2).ToString());
-                        for (int j = 3; j < row.LastCellNum-1; j++)
+                        for (int j = 3; j < row.LastCellNum; j++)
                         {
                             string temp = row.GetCell(j).ToString();
 
                             try
                             {
-                                s += (int)Convert.ToSingle(temp);
+                                s += Convert.ToDouble(temp);
                             }
                             catch (Exception e)
                             {
@@ -57,10 +58,18 @@ namespace Exceltesting
                     }
 
                 }
+                
+                for (i=1;i<22;i++)
+                {
+                    row = sheet.GetRow(i);
+                    Console.Write(row.GetCell(2));
+                    double t = intArray[i] / 17;
+                    Console.WriteLine("{0:F1}",t);
+
+                }
                 file2.Close();
                 workbook.Close();
                 Console.ReadLine();
-
             }
 
         }
